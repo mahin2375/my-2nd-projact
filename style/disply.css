@@ -1,0 +1,14 @@
+.card {
+    border: 2px solid #cbd5e1;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 24px;
+    background: #f8fafc;
+}
+.example {
+    border: 2px solid #005ccc;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 24px;
+    background: #e62f9a;
+}
