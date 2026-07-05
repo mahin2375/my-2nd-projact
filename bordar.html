@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Border, Margin, Padding and Box Model</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #eef2ff, #f8fafc);
+            color: #111827;
+            padding: 24px;
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            background: white;
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: 0 14px 35px rgba(15, 23, 42, 0.12);
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #1d4ed8;
+            font-size: 32px;
+        }
+
+        .intro {
+            line-height: 1.7;
+            color: #475569;
+            margin-bottom: 24px;
+        }
+
+        .card {
+            border: 2px solid #cbd5e1;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 24px;
+            background: #f8fafc;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #0f172a;
+        }
+
+        .demo-box {
+            background: #dbeafe;
+            border: 4px solid #2563eb;
+            padding: 24px;
+            margin: 24px 0;
+            text-align: center;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .box-model {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .layer {
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .margin-layer {
+            background: #7c3aed;
+        }
+
+        .border-layer {
+            background: #dc2626;
+        }
+
+        .padding-layer {
+            background: #0f766e;
+        }
+
+        .content-layer {
+            background: #2563eb;
+        }
+
+        .example-list {
+            padding-left: 20px;
+            line-height: 1.8;
+            color: #334155;
+        }
+
+        .highlight {
+            background: #eff6ff;
+            padding: 2px 6px;
+            border-radius: 6px;
+            color: #1d4ed8;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CSS Border, Margin, Padding and Box Model</h1>
+        <p class="intro">
+            The box model is the foundation of layout in CSS. Every element is wrapped in a box with <span class="highlight">content</span>, <span class="highlight">padding</span>, <span class="highlight">border</span>, and <span class="highlight">margin</span>.
+        </p>
+
+        <div class="card">
+            <h2>1. Border</h2>
+            <p>The border surrounds the element and gives it a visible outline.</p>
+            <div class="demo-box">This box has a border</div>
+        </div>
+
+        <div class="card">
+            <h2>2. Padding</h2>
+            <p>Padding creates space inside the element between the content and the border.</p>
+            <div class="demo-box" style="padding: 40px;">More padding makes the content feel airy</div>
+        </div>
+
+        <div class="card">
+            <h2>3. Margin</h2>
+            <p>Margin creates space outside the element so it does not touch other elements.</p>
+            <div class="demo-box" style="margin: 36px 0;">This box has external space</div>
+        </div>
+
+        <div class="card">
+            <h2>4. Box Model</h2>
+            <p>The total size of an element is affected by content + padding + border + margin.</p>
+            <div class="box-model">
+                <div class="layer margin-layer">Margin</div>
+                <div class="layer border-layer">Border</div>
+                <div class="layer padding-layer">Padding</div>
+                <div class="layer content-layer">Content</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Quick Summary</h2>
+            <ul class="example-list">
+                <li><strong>Border:</strong> outlines the element.</li>
+                <li><strong>Padding:</strong> space inside the element.</li>
+                <li><strong>Margin:</strong> space outside the element.</li>
+                <li><strong>Box Model:</strong> the full structure of every HTML element.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
