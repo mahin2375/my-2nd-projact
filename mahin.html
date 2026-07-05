@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mahin | Shopify Developer Portfolio</title>
+  <style>
+    :root {
+      --bg: #050816;
+      --card: rgba(10, 17, 37, 0.74);
+      --text: #f5f7ff;
+      --muted: #9cb0d8;
+      --accent: #4f7cff;
+      --accent-2: #12d6c4;
+      --border: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Poppins", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(79, 124, 255, 0.25), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(18, 214, 196, 0.2), transparent 24%),
+        var(--bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      padding: 18px 0;
+      backdrop-filter: blur(12px);
+      background: rgba(5, 8, 22, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .logo span { color: var(--accent-2); }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover { color: #fff; }
+
+    .hero {
+      padding: 70px 0 48px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      line-height: 1.1;
+      margin: 0 0 16px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin: 0 0 24px;
+      animation: fadeUp 1s ease both;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      animation: fadeUp 1.1s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      box-shadow: 0 10px 25px rgba(79, 124, 255, 0.3);
+    }
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 18px;
+      border-radius: 28px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.28);
+      overflow: hidden;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .hero-card::before,
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      padding: 2px;
+      background: var(--border);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: spin 5s linear infinite;
+      opacity: 0.9;
+    }
+
+    .hero-card::after {
+      filter: blur(16px);
+      opacity: 0.3;
+      animation-duration: 7s;
+    }
+
+    .card-body {
+      position: relative;
+      z-index: 1;
+      padding: 16px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .stat {
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.05);
+      text-align: center;
+    }
+
+    .stat strong { display: block; font-size: 1.2rem; }
+    .stat span { color: var(--muted); font-size: 0.82rem; }
+
+    section { padding: 34px 0 56px; }
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .section-title h2 { margin: 0; font-size: 1.4rem; }
+    .section-title p { margin: 0; color: var(--muted); }
+
+    .grid { display: grid; gap: 18px; }
+    .services-grid, .portfolio-grid { grid-template-columns: repeat(3, 1fr); }
+
+    .card {
+      position: relative;
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      min-height: 190px;
+      overflow: hidden;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .card:hover { transform: translateY(-4px); border-color: rgba(79,124,255,.5); }
+    .card::before {
+      content: "";
+      position: absolute;
+      left: -50%;
+      top: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(79,124,255,.28), transparent 45%);
+      animation: rotateBorder 5s linear infinite;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card > * { position: relative; z-index: 1; }
+
+    .card h3 { margin: 8px 0 8px; font-size: 1.08rem; }
+    .card p { color: var(--muted); margin: 0; line-height: 1.7; }
+    .pill {
+      display: inline-block;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: rgba(79,124,255,.16);
+      color: #dfe8ff;
+      margin-bottom: 8px;
+    }
+
+    .portfolio-card .thumb {
+      height: 160px;
+      border-radius: 16px;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, rgba(79,124,255,.35), rgba(18,214,196,.23));
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    .booking-wrap {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .booking-card,
+    .contact-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 22px;
+    }
+
+    form { display: grid; gap: 14px; }
+    label { font-size: 0.92rem; color: #dfe8ff; }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(2,7,21,.6);
+      color: white;
+      font: inherit;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79,124,255,.2); }
+    textarea { min-height: 96px; resize: vertical; }
+    button[type="submit"] { border: none; cursor: pointer; }
+
+    .message {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(18,214,196,.16);
+      color: #bffcf6;
+      display: none;
+    }
+
+    .booking-list {
+      margin-top: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .booking-item {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 0 36px;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 12px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes rotateBorder {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 900px) {
+      .hero, .booking-wrap { grid-template-columns: 1fr; }
+      .services-grid, .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .services-grid, .portfolio-grid, .stat-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 40px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="logo">Mahin<span>.</span></a>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#booking">Book</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero">
+      <div>
+        <h1>Professional Shopify Developer crafting fast, high-converting stores.</h1>
+        <p>I build premium Shopify experiences for brands that want better design, faster checkout, and more sales. From custom themes to optimization, I turn ideas into beautiful storefronts.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#booking">Book a free consultation</a>
+          <a class="btn btn-secondary" href="#portfolio">See my work</a>
+        </div>
+        <div class="stat-grid">
+          <div class="stat"><strong>50+</strong><span>Projects</span></div>
+          <div class="stat"><strong>98%</strong><span>Client satisfaction</span></div>
+          <div class="stat"><strong>24/7</strong><span>Support</span></div>
+        </div>
+      </div>
+
+      <div class="hero-card reveal">
+        <div class="card-body">
+          <div class="pill">Available for new Shopify projects</div>
+          <h3 style="margin-top: 6px;">Modern storefronts with smooth animations and conversion-first UX</h3>
+          <p style="color: var(--muted); line-height: 1.7;">Theme customization, app integration, speed improvements, and full store setup tailored to your brand.</p>
+          <div class="stat-grid">
+            <div class="stat"><strong>⚡</strong><span>Fast builds</span></div>
+            <div class="stat"><strong>🛍️</strong><span>Shopify focus</span></div>
+            <div class="stat"><strong>📈</strong><span>Sales growth</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="container reveal">
+      <div class="section-title">
+        <h2>Services</h2>
+        <p>What I can help you launch or upgrade</p>
+      </div>
+      <div class="grid services-grid">
+        <article class="card">
+          <div class="pill">Shopify Store Setup</div>
+          <h3>Complete store launch</h3>
+          <p>From domain and product structure to theme setup and payment integration, I create a polished starting point.</p>
+        </article>
+        <article class="card">
+          <div class="pill">Custom Theme Design</div>
+          <h3>Beautiful, mobile-ready storefronts</h3>
+          <p>Unique layouts with smooth motion, branded visuals, and a frictionless shopping experience.</p>
+        </article>
+        <article class="card">
+          <div class="pill">Conversion Optimization</div>
+          <h3>Speed, UX, and sales-focused improvements</h3>
+          <p>I improve checkout flow, product pages, and sections to increase trust and boost revenue.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="portfolio" class="container reveal">
+      <div class="section-title">
+        <h2>Selected Projects</h2>
+        <p>Examples of recent Shopify work</p>
+      </div>
+      <div class="grid portfolio-grid">
+        <article class="card portfolio-card">
+          <div class="thumb">Fashion Brand</div>
+          <h3>Luxury fashion Shopify store</h3>
+          <p>High-end visuals, animated product highlights, and faster mobile experience.</p>
+        </article>
+        <article class="card portfolio-card">
+          <div class="thumb">Beauty Studio</div>
+          <h3>Beauty subscription experience</h3>
+          <p>Subscription flow, bundles, and personalized product recommendations built in.</p>
+        </article>
+        <article class="card portfolio-card">
+          <div class="thumb">Tech Goods</div>
+          <h3>Modern gadget storefront</h3>
+          <p>Improved navigation, sticky add-to-cart, and conversion-focused product pages.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="booking" class="container reveal">
+      <div class="section-title">
+        <h2>Book a Consultation</h2>
+        <p>Choose a time and I’ll follow up with a plan</p>
+      </div>
+      <div class="booking-wrap">
+        <div class="booking-card">
+          <form id="bookingForm">
+            <label>Full name</label>
+            <input type="text" id="name" placeholder="Your name" required />
+
+            <label>Email</label>
+            <input type="email" id="email" placeholder="you@example.com" required />
+
+            <label>Service</label>
+            <select id="service" required>
+              <option value="">Select a service</option>
+              <option>Shopify store setup</option>
+              <option>Custom theme design</option>
+              <option>Speed & conversion optimization</option>
+            </select>
+
+            <label>Date</label>
+            <input type="date" id="date" required />
+
+            <label>Notes</label>
+            <textarea id="notes" placeholder="Tell me about your project"></textarea>
+
+            <button class="btn btn-primary" type="submit">Reserve booking</button>
+          </form>
+          <div id="message" class="message"></div>
+        </div>
+
+        <div class="contact-card">
+          <h3 style="margin-top:0;">Upcoming bookings</h3>
+          <p style="color: var(--muted);">Your reservations appear here instantly using local browser storage.</p>
+          <div id="bookingList" class="booking-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="container reveal">
+      <div class="contact-card">
+        <div class="section-title" style="margin-bottom: 10px;">
+          <h2>Let’s build your next Shopify store</h2>
+          <a class="btn btn-secondary" href="mailto:hello@mahin.dev">hello@mahin.dev</a>
+        </div>
+        <p style="color: var(--muted); line-height: 1.8;">If you want a polished storefront with fast performance and a modern feel, I’m ready to help you launch it.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© 2026 Mahin. Shopify Developer • Portfolio • Booking System</div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const form = document.getElementById('bookingForm');
+    const message = document.getElementById('message');
+    const list = document.getElementById('bookingList');
+
+    function loadBookings() {
+      const bookings = JSON.parse(localStorage.getItem('shopifyBookings') || '[]');
+      list.innerHTML = '';
+      if (!bookings.length) {
+        list.innerHTML = '<div class="booking-item">No bookings yet. Be the first to reserve a session.</div>';
+        return;
+      }
+      bookings.slice().reverse().forEach(booking => {
+        const item = document.createElement('div');
+        item.className = 'booking-item';
+        item.innerHTML = `<strong>${booking.name}</strong> • ${booking.service} • ${booking.date}<br>${booking.notes || 'No extra notes'}`;
+        list.appendChild(item);
+      });
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const booking = {
+        name: document.getElementById('name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        service: document.getElementById('service').value,
+        date: document.getElementById('date').value,
+        notes: document.getElementById('notes').value.trim()
+      };
+
+      const bookings = JSON.parse(localStorage.getItem('shopifyBookings') || '[]');
+      bookings.push(booking);
+      localStorage.setItem('shopifyBookings', JSON.stringify(bookings));
+      form.reset();
+      message.style.display = 'block';
+      message.textContent = `Thanks ${booking.name}! Your booking request for ${booking.service} has been saved.`;
+      loadBookings();
+    });
+
+    loadBookings();
+  </script>
+</body>
+</html>

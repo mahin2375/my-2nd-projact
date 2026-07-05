@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advanced CSS Selectors</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+      margin: 0;
+      padding: 32px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #1d4ed8;
+    }
+
+    .example {
+      margin-bottom: 24px;
+      padding: 16px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      background: #fafafa;
+    }
+
+    .card p {
+      color: #2563eb;
+      font-weight: 600;
+    }
+
+    .menu > li {
+      background: #2563eb;
+      color: white;
+      padding: 8px 12px;
+      margin: 6px 0;
+      border-radius: 8px;
+      list-style: none;
+      width: fit-content;
+    }
+
+    .title + p {
+      font-style: italic;
+      color: #7c3aed;
+    }
+
+    .box ~ .note {
+      background: #ecfccb;
+      padding: 10px;
+      border-left: 4px solid #65a30d;
+    }
+
+    input[type="email"] {
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 280px;
+    }
+
+    input[type="email"]:focus {
+      outline: 2px solid #0f766e;
+      border-color: #0f766e;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Advanced CSS Selectors</h1>
+    <p>These examples show a few powerful CSS selectors you can use in your projects.</p>
+
+    <div class="example">
+      <h3>1. Descendant selector</h3>
+      <div class="card">
+        <p>This paragraph is inside .card, so it is styled by .card p.</p>
+      </div>
+    </div>
+
+    <div class="example">
+      <h3>2. Child selector</h3>
+      <ul class="menu">
+        <li>Direct child 1</li>
+        <li>Direct child 2</li>
+        <li>Direct child 3</li>
+      </ul>
+    </div>
+
+    <div class="example">
+      <h3>3. Adjacent sibling selector</h3>
+      <h4 class="title">Hello</h4>
+      <p>This paragraph comes immediately after the heading.</p>
+    </div>
+
+    <div class="example">
+      <h3>4. General sibling selector</h3>
+      <div class="box">Box element</div>
+      <p class="note">This paragraph is a sibling of .box and gets the special style.</p>
+    </div>
+
+    <div class="example">
+      <h3>5. Attribute selector</h3>
+      <input type="email" placeholder="Enter your email" />
+    </div>
+  </div>
+</body>
+</html>
